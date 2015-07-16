@@ -2,10 +2,41 @@
 	<strong>Title:</strong>
 	<%= @article.title %>
 </p>
-<p>      </p>
+<p>=================================</p>
 <p>
 	<strong>Text:</strong>
 	<%= @article.text %>
 </p>
+<p>=================================</p>
+<h4>Comments</h4>
+<p>=================================</p>
+<% @article.comments.each do |comment| %>
+  <p>
+    <strong>Commenter:</strong><br>
+    <%= comment.commenter %>
+  </p>
+ 
+  <p>
+    <strong>Comment:</strong><br>
+    <%= comment.body %>
+  </p>
+<% end %>
+<p>=================================</p>
+<h4>Add a comment</h4>
+<p>=================================</p>
+<%= form_for([@article, @article.comments.build]) do |comment| %>
+	<p>
+		<%= comment.label :commenter %></p>
+		<p><%= comment.text_field :commenter %>
+	</p>
+	<p>
+		<%= comment.label :body %></p>
+		<p><%= comment.text_area :body %>
+	</p>
+	<p>
+		<%= comment.submit %>
+	</p>
+	<% end %>
 
 <%= link_to "Back to list", articles_path %>
+<%= link_to 'Edit', edit_article_path(@article) %>
